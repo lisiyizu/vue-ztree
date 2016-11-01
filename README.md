@@ -1,6 +1,10 @@
-# vueztree
+# vue-ztree
 
-> A Vue.js project
+![](vue-ztree.png)
+
+通过以下demo来实现
+
+###app.vue代码如下
 
 ```html
 <template>
@@ -70,33 +74,33 @@ body {font-family: Helvetica, sans-serif;}
 ```
 
 ###vue-ztree/初始化参数
-<table style="height: 120px; width: 879px;" border="0" align="left">
-<tbody>
-<tr>
-<td style="text-align: center;">参数</td>
-<td style="text-align: center;">类型</td>
-<td style="text-align: center;">默认值</td>
-<td style="text-align: center;">描述</td>
-</tr>
-<tr>
-<td style="text-align: center;">list</td>
-<td style="text-align: center;">Array</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">树的结构数据源</td>
-</tr>
-<tr>
-<td style="text-align: center;">func</td>
-<td style="text-align: center;">Function</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">点击节点回调的方法</td>
-</tr>
-<tr>
-<td style="text-align: center;">is-open</td>
-<td style="text-align: center;">Bealoon</td>
-<td style="text-align: center;">true</td>
-<td style="text-align: center;">是否展开树</td>
-</tr>
-</tbody>
+<table  border="0" align="left">
+	<tbody>
+		<tr>
+			<td >参数</td>
+			<td >类型</td>
+			<td >默认值</td>
+			<td >描述</td>
+		</tr>
+		<tr>
+			<td >list</td>
+			<td >Array</td>
+			<td >-</td>
+			<td >树的结构数据源</td>
+		</tr>
+		<tr>
+			<td >func</td>
+			<td >Function</td>
+			<td >-</td>
+			<td >点击节点回调的方法</td>
+		</tr>
+		<tr>
+			<td >is-open</td>
+			<td >Bealoon</td>
+			<td >true</td>
+			<td >是否展开树</td>
+		</tr>
+	</tbody>
 </table>
 
 
