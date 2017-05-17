@@ -1,5 +1,7 @@
 # vue-ztree
 
+[vue-ztree-2.0  vue2.0版本地址](https://github.com/lisiyizu/vue-ztree-2.0)
+
 ![](vue-ztree.png)
 
 通过以下demo来实现
