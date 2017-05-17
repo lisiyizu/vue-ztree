@@ -241,11 +241,13 @@ export default{
                      
                      // 根判断
                 	 if(this.root=='0'){
+
                        strRootClass =  (this.num==0 && !this.model.children) ? "roots_docu" : (this.nodes==1) || (this.num==0 && this.nodes!=this.num+1) ? 
-                         "root_" : (this.nodes == this.num+1) ? "bottom_" : "center_" 
+                         "root_" : (this.nodes == this.num+1) ? "bottom_" : "center_";
                      
                      // 子树判断
                 	 }else if(this.root=='1') {
+
                         strRootClass =  this.nodes>1 && this.model.children && this.nodes!=this.num+1
                          ? "center_" : 
                             (this.num == 0 && this.nodes>1) || (this.nodes!=this.num+1) ? "center_docu" : 
@@ -260,16 +262,20 @@ export default{
                 },
                 // 展开/收起
                 prefixClass:function(){
-                	console.log(this.rootClass);
-
                 	var returnChar = "";
+                	
                 	if(this.rootClass.indexOf("docu")==-1){
 	                	if(this.model.isFolder){
-                           returnChar = "open";
+	                        returnChar = "open";
 	                	}else {
-                           returnChar = 'close'
-	                	}
+	                        returnChar = 'close';
+		                }
 	                }
+          
+	                if(!this.model.children && this.rootClass.indexOf("docu")==-1){
+                        returnChar = 'docu';
+	                }
+
 	                return returnChar;
                 }
         	},
