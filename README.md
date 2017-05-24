@@ -13,7 +13,7 @@
   <div id="app">
     <h1>{{ msg }}</h1>
     <div style='width:280px;'>
-      <vue-ztree :list.sync='ztreeDataSource' :func.sync='nodeClick' :is-open='true'></vue-ztree>
+      <vue-ztree :list.sync='ztreeDataSource' :func='nodeClick' :is-open='true'></vue-ztree>
     </div>
   </div>
 </template>
