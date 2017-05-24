@@ -4,7 +4,7 @@
   "author": "lisiyizu <512235550@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot --host 127.0.0.1 --port 8081",
+    "dev": "webpack-dev-server --inline --hot --host 127.0.0.1 --port 8087",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {

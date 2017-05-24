@@ -24,7 +24,7 @@
 
 	ul.ztree {border:1px solid #ddd;background: #ffffff;width:100%;height:auto;overflow-y:scroll;overflow-x:auto;}
 
-	.ztree * {padding:0; margin:0; font-size:14px; font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif}
+	.ztree * {padding:0; margin:0; font-size:15px; font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif}
 	.ztree {margin:0; padding:5px; color:#333 ;}
 	.ztree li{position: relative; padding:0; margin:0; list-style:none; line-height:24px; text-align:left; white-space:nowrap; outline:0}
 	.ztree li ul{ margin:0; padding:0 0 0 18px}
@@ -110,16 +110,22 @@
 <template>
 	<!--（ztree－🌲）-->
 	<div class="ztree_content_wrap">
-		<div class="zTreeDemoBackground left" v-if='list'>
+		<div class="zTreeDemoBackground left">
 			<ul class="ztree">
-				<ztree-item v-for='(i,m) in list' :model.sync="m" :num.sync='i' root='0' :nodes.sync='list.length' :callback='func' :trees.sync='list'></ztree-item>
+				<ztree-item v-for='(i,m) in treeDataSource' :model.sync="m" :num.sync='i' root='0' :nodes.sync='treeDataSource.length' :callback='func' :trees.sync='treeDataSource'></ztree-item>
 			</ul>
 		</div>
 	</div>
 </template>
 
 <script>
+import Vue from 'vue'
 export default{
+	data () {
+		return {
+			treeDataSource:[]
+		}
+	},
 	props:{
 		// 树数据
         list:{
@@ -128,23 +134,13 @@ export default{
         },
         // 点击回调
 		func:{
-			type:Function,
-			twoWay:true
+			type:Function
 		},
 		// 是否展开
 		isOpen:{
 			type:Boolean,
-			twoWay:true,
 			default:false
 		}
-	},
-	watch:{
-        'list':{
-        	handler:function(){
-        		this.initTreeData();
-        	},
-        	deep:true
-        }
 	},
 	methods:{
         initTreeData(){
@@ -170,7 +166,7 @@ export default{
 
            recurrenceFunc(tempList);
 
-           this.list = tempList;
+           this.treeDataSource = tempList;
         }
 	},
 	components:{
@@ -201,17 +197,12 @@ export default{
                     twoWay:true
         		},
         		callback:{
-					type:Function,
-					twoWay:true
+					type:Function
 				}
         	},
         	methods:{
                 Func(m){
-                    if(m.path){
-                      window.location.href = m.path;
-                    }else{
-                   	  this.callback.call(null,m);
-                    }
+                    this.callback.call(null,m);
                     
                     // 查找点击的子节点
                     var recurFunc = function(data){
@@ -258,36 +249,47 @@ export default{
                 },
                 // 是否有儿子节点
                 isChildren:function(){
-                     return this.model.children.length>0 && this.num+1 != this.nodes;
+                     return this.num+1 != this.nodes;
                 },
                 // 展开/收起
                 prefixClass:function(){
                 	var returnChar = "";
-                	
                 	if(this.rootClass.indexOf("docu")==-1){
 	                	if(this.model.isFolder){
-	                        returnChar = "open";
+                           returnChar = "open";
 	                	}else {
-	                        returnChar = 'close';
-		                }
-	                }
-          
-	                if(!this.model.children && this.rootClass.indexOf("docu")==-1){
-                        returnChar = 'docu';
+                           returnChar = 'close'
+	                	}
 	                }
 
+	                if(!this.model.children && this.rootClass.indexOf("docu")==-1){
+                        returnChar = 'docu'
+	                }
+	                
 	                return returnChar;
+                },
+                liClassVal:function(){
+                	 return "level"+this.num;
+                },
+                spanClassVal:function(){
+                	 return "button level"+this.num+" switch "+this.rootClass+this.prefixClass;
+                },
+                aClassVal:function(){
+                     return this.model.clickNode ? "level"+this.num+' curSelectedNode':"level"+this.num;
+                },
+                ulClassVal:function(){
+                	return this.isChildren && this.model.children ?"level"+this.num+' line':"level"+this.num;
                 }
         	},
             template: 
-            `<li class="level{{num}}">
-				<span class="button level{{num}} switch {{rootClass}}{{prefixClass}}" @click='open(model)'></span>
-				<a class="level{{num}} {{model.clickNode?'curSelectedNode':''}}" @click='Func(model)'>
-				    <span><img v-if='model.iconPath' :src='model.iconPath' :style='model.iconStyle'></span>
+            `<li :class="liClassVal">
+				<span :class="spanClassVal" @click='open(model)'></span>
+				<a :class="aClassVal" @click='Func(model)'>
+				    <span v-if='model.iconPath'><img :src='model.iconPath' :style='model.iconStyle'></span>
 					<span class="node_name">{{model.name}}</span>
 				</a>
-				<ul class="level{{num}} {{isChildren?'line':''}}" v-show='model.isFolder'>
-					<ztree-item v-for="(i,item) in model.children" :callback.sync='callback' :model.sync="item" :num.sync='i' root='1' :nodes.sync='model.children.length' :trees.sync='trees'></ztree-item>
+				<ul :class="ulClassVal" v-show='model.isFolder'>
+					<ztree-item v-for="(i,item) in model.children" :callback='callback' :model.sync="item" :num.sync='i' root='1' :nodes.sync='model.children.length' :trees.sync='trees'></ztree-item>
 				</ul>
 			</li>`
 		}
