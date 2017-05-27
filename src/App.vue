@@ -1,9 +1,18 @@
 <template>
-  <div id="app">
-    <h1>{{ msg }}</h1>
-    <div style='width:280px;' v-if='ztreeDataSource.length>0'>
-      <vue-ztree :list.sync='ztreeDataSource' :func='nodeClick' :is-open='true'></vue-ztree>
-    </div>
+  <div style='display:flex;flex:2'>
+      <div style='flex:1'>
+        <h1>Hello Ztree(非异步)</h1>
+        <div style='width:280px;' v-if='ztreeDataSource.length>0'>
+           <vue-ztree :list.sync='ztreeDataSource' :func='null' :expand='null'  :is-open='false'></vue-ztree>
+        </div>
+      </div>
+
+      <div style='flex:1'>
+        <h1>Hello Ztree(异步加载)</h1>
+        <div style='width:280px;' v-if='ztreeDataSourceSync.length>0'>
+           <vue-ztree :list.sync='ztreeDataSourceSync' :func='nodeClick' :expand='expandClick'  :is-open='false'></vue-ztree>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -14,33 +23,68 @@ export default {
   data () {
     return {
       msg: 'Hello Vue-Ztree!',
-      ztreeDataSource:[]
+      ztreeDataSource:[],
+      ztreeDataSourceSync:[{
+          id:220,
+          name:"娱乐",
+          children:[{
+            id:881,
+            name:"游戏"
+          }]
+      }]
     }
   },
   methods:{
     nodeClick:function(m){
        console.log(JSON.parse(JSON.stringify(m)));
+    },
+    // 点击展开收起
+    expandClick:function(m){
+       console.log(JSON.parse(JSON.stringify(m)));
+       // 点击异步加载
+       if(m.isExpand) {
+          // 动态加载子节点, 模拟ajax请求数据
+         // 请注意 id 不能重复哦。
+         if(m.hasOwnProperty("children")){
+            
+            m.loadNode = 1; // 正在加载节点
 
-       var node = JSON.parse(JSON.stringify(m));
-       // 动态加载子节点, 模拟ajax请求数据
-       // 请注意 id 不能重复哦。
-       if(node.hasOwnProperty("children")){
-            node.children.push({
-                id:+new Date(),
-                name:"动态加载节点1",
-                path:"",
-                clickNode:false,
-                isFolder:false,
-                children:[{
-                      id:+new Date()+1,
-                      name:"动态加载末节点",
+            setTimeout(()=>{
+
+              m.loadNode = 2; // 节点加载完毕
+
+              m.isFolder = !m.isFolder; 
+
+              var node = JSON.parse(JSON.stringify(m));
+
+             // 动态加载子节点, 模拟ajax请求数据
+             // 请注意 id 不能重复哦。
+             if(node.hasOwnProperty("children")){
+                  node.children.push({
+                      id:+new Date(),
+                      name:"动态加载节点1",
                       path:"",
                       clickNode:false,
                       isFolder:false,
-                }]
-            });
+                      isExpand:false,
+                      loadNode:0,
+                      children:[{
+                            id:+new Date()+1,
+                            name:"动态加载末节点",
+                            path:"",
+                            clickNode:false,
+                            isFolder:false,
+                            isExpand:false,
+                            loadNode:0
+                      }]
+                  });
+                  
+                  m.children = node.children;
+             }
+
+            },1000)
             
-            m.children = node.children;
+         }
        }
     }
   },

@@ -91,11 +91,17 @@ body {font-family: Helvetica, sans-serif;}
 			<td >树的结构数据源</td>
 		</tr>
 		<tr>
-			<td >func</td>
-			<td >Function</td>
-			<td >-</td>
-			<td >点击节点回调的方法</td>
-		</tr>
+      <td >func</td>
+      <td >Function</td>
+      <td >-</td>
+      <td >点击节点事件</td>
+    </tr>
+    <tr>
+      <td >expand</td>
+      <td >Function</td>
+      <td >-</td>
+      <td >点击展开/收起的方法（在异步加载的时候使用）</td>
+    </tr>
 		<tr>
 			<td >is-open</td>
 			<td >Bealoon</td>
