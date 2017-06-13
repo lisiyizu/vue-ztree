@@ -32,7 +32,7 @@ body {font-family: Helvetica, sans-serif;}
       <div style='flex:1'>
         <h1>Hello Ztree(右击事件)</h1>
         <div style='width:280px;' v-if='ztreeDataSourceList.length>0'>
-           <vue-ztree :list.sync='ztreeDataSourceList' :contentmenu='contextmenuClick' :is-open='true'></vue-ztree>
+           <vue-ztree :list.sync='ztreeDataSourceList' :contextmenu='contextmenuClick' :is-open='true'></vue-ztree>
         </div>
       </div>
   </div>
