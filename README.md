@@ -17,7 +17,7 @@
   <div id="app">
     <h1>{{ msg }}</h1>
     <div style='width:280px;' v-if='ztreeDataSource.length>0'>
-      <vue-ztree :list.sync='ztreeDataSource' :func='nodeClick' :expand='expandClick' :is-open='true'></vue-ztree>
+      <vue-ztree :list.sync='ztreeDataSource' :func='nodeClick' :expand='expandClick' :contextmenu='contextmenuClick' :is-open='true'></vue-ztree>
     </div>
   </div>
 </template>
@@ -63,8 +63,13 @@ export default {
     }
   },
   methods:{
+    // 点击节点
     nodeClick:function(m){
        console.log(JSON.parse(JSON.stringify(m)));
+    },
+    // 右击事件
+    contextmenuClick:function(){
+       console.log("触发了自定义的contextmenuClick事件");
     },
     // 点击展开收起
     expandClick:function(m){
@@ -148,6 +153,12 @@ body {font-family: Helvetica, sans-serif;}
       <td >Function</td>
       <td >-</td>
       <td >点击节点事件</td>
+    </tr>
+    <tr>
+      <td >contextmenu</td>
+      <td >Function</td>
+      <td >-</td>
+      <td >右击节点事件</td>
     </tr>
     <tr>
       <td >expand</td>

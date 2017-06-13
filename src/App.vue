@@ -18,7 +18,7 @@ body {font-family: Helvetica, sans-serif;}
       <div style='flex:1'>
         <h1>Hello Ztree(非异步)</h1>
         <div style='width:280px;' v-if='ztreeDataSource.length>0'>
-           <vue-ztree :list.sync='ztreeDataSource' :func='null' :expand='null'  :is-open='false'></vue-ztree>
+           <vue-ztree :list.sync='ztreeDataSource' :is-open='false'></vue-ztree>
         </div>
       </div>
 
@@ -30,9 +30,9 @@ body {font-family: Helvetica, sans-serif;}
       </div>
 
       <div style='flex:1'>
-        <h1>Hello Ztree(图标)</h1>
+        <h1>Hello Ztree(右击事件)</h1>
         <div style='width:280px;' v-if='ztreeDataSourceList.length>0'>
-           <vue-ztree :list.sync='ztreeDataSourceList' :func='null' :expand='null'  :is-open='true'></vue-ztree>
+           <vue-ztree :list.sync='ztreeDataSourceList' :contentmenu='contextmenuClick' :is-open='true'></vue-ztree>
         </div>
       </div>
   </div>
@@ -92,8 +92,13 @@ export default {
     }
   },
   methods:{
+    // 点击节点
     nodeClick:function(m){
        console.log(JSON.parse(JSON.stringify(m)));
+    },
+    // 右击事件
+    contextmenuClick:function(){
+       console.log("触发了自定义的contextmenuClick事件");
     },
     // 点击展开收起
     expandClick:function(m){
