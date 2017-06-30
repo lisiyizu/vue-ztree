@@ -228,7 +228,7 @@ export default{
         	},
         	methods:{
                 Func(m){
-                	if(typeof this.expandfunc == "function") {
+                	if(typeof this.callback == "function") {
 	                    this.callback.call(null,m);
 	                }
                     
