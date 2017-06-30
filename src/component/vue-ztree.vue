@@ -169,12 +169,12 @@ export default{
             // 递归操作，增加删除一些属性。比如: 展开/收起
             var recurrenceFunc = (data) => {
                 data.forEach((m)=>{
-                    m.clickNode = false;
+                    m.clickNode = m.hasOwnProperty("clickNode") ? m.clickNode : false;
                     m.children = m.children || [];
 
                     if(m.children.length>0){
-                   	  m.isFolder = this.isOpen;
-                   	  m.isExpand = this.isOpen;
+                   	  m.isFolder =  m.hasOwnProperty("open") ? m.open : this.isOpen;
+                   	  m.isExpand =  m.hasOwnProperty("open") ? m.open : this.isOpen;
                    	  m.loadNode = 0; 
                    	  recurrenceFunc(m.children);
                     }else{

@@ -50,9 +50,11 @@ export default {
           id:880,
           name:"娱乐",
           iconClass:"iconClassRoot",
+          open:true,
           children:[{
             id:881,
             name:"游戏",
+            clickNode:true,
             iconClass:"iconClassNode",
           },{
             id:882,
@@ -67,6 +69,7 @@ export default {
           id:990,
           name:"BAT",
           iconClass:"iconClassRoot",
+          open:false,
           children:[{
               id:991,
               name:"马化腾",
