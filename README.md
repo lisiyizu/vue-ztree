@@ -1,5 +1,7 @@
 # vue-ztree
 
+## Vue小伙伴交流群: 590688906
+
 [vue-ztree-2.0 版本地址](https://github.com/lisiyizu/vue-ztree-2.0)
 
 [vue-ztree 演示预览地址](https://lisiyizu.github.io/vue-ztree)
