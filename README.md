@@ -1,6 +1,6 @@
 # vue-ztree
 
-## Vue小伙伴交流群: 590688906
+### Vue小伙伴交流群: 590688906
 
 [vue-ztree-2.0 版本地址](https://github.com/lisiyizu/vue-ztree-2.0)
 
@@ -12,7 +12,7 @@
 
 通过以下demo来实现
 
-###app.vue代码如下
+### app.vue代码如下
 
 ```html
 <template>
