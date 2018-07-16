@@ -134,7 +134,7 @@ export default{
 		}
 	},
 	props:{
-		// 树数据
+		// 树数据11111
         list:{
        	  	type:Array,
        	  	twoWay:true
